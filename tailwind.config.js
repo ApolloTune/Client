@@ -27,7 +27,8 @@ export default {
       },
       colors: {
         red: {
-          50: "#FD005D"
+          50: "#FD005D",
+          100: "#B60546"
         },
         pink: {
           50: "#D3004D"
