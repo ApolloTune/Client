@@ -5,8 +5,7 @@ import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 function Header() {
   return (
-    <header className="bg-red-50 p-4 text-white	">
-      <div className="container mx-auto bg-red-50">
+      <div className="container mx-auto bg-pink-50 p-4 text-white">
         <div className="flex items-center justify-between">
           <div className='flex items-center justify-between space-x-3'>
             <img className='w-15 h-20 rounded-[32px]' src="/Images/apollo.png" alt="Logo" />
@@ -19,7 +18,6 @@ function Header() {
           </nav>
         </div>
       </div>
-    </header>
   )
 }
 
