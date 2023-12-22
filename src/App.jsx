@@ -4,9 +4,13 @@ function App() {
 
   return (
     <>
-    <Header/>
-    <Footer/>
+      <Header />
+      <div className="container mx-auto px-4 bg-black-50">
+
+      </div>
     </>
+
+
 
   )
 }
