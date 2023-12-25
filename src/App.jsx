@@ -5,6 +5,7 @@ import KeywordSearch from "./pages/KeywordSearch"
 import NaturalLanguageSearch from "./pages/NaturalLanguageSearch"
 import SuggestionSearch from "./pages/SuggestionSearch"
 import PlaylistSearch from "./pages/PlaylistSearch"
+import Footer from "./parts/Footer";
 function App() {
 
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/playlist-fal" element={<PlaylistSearch />} />
         </Routes>
       </div>
+      <Footer/>
     </>
   )
 }
