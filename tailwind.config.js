@@ -25,6 +25,10 @@ export default {
       fontWeight: {
         interBoldItalic: '700',
       },
+      fontFamily : {
+        'sansi': ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
+
+      },
       colors: {
         red: {
           50: "#FD005D",
