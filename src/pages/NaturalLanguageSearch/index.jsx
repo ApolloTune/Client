@@ -1,5 +1,15 @@
 import React from 'react';
 import MusicCard from '../../components/MusicCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation';
+import 'swiper/css/scrollbar';
+import 'swiper/css/free-mode'
+import exampleData from '../../../JsonTestData/musicList'
+import { FreeMode, Pagination, Navigation, Scrollbar, A11y, Mousewheel } from 'swiper/modules'
+
+import { RxArrowTopRight } from 'react-icons/rx'
 function NaturalLanguageSearch() {
   return (
     <div className='container flex justify-content flex-col h-[516px] bg-black-125 mt-12 border-4 border-red-50 rounded-[18px]'>
@@ -12,7 +22,39 @@ function NaturalLanguageSearch() {
       <p className="italic tracking-wide text-white mt-2 mx-auto">
         örn: Bugün çok enerjik hissediyorum bana uygun Türkçe pop müzikleri öner.
       </p>
-      <MusicCard songName={"Wonderful Life"} songArtist={"Smith & Burrows"} songPhoto={"https://i.scdn.co/image/ab67616d0000b273a2d7163d26591135814ea80e"}/>
+      <div className='flex items-center justify-center flex flex-col'>
+        <Swiper breakpoints={{
+          475: {
+            slidesPerView: 2,
+            spaceBetween: 15
+          },
+          700: {
+            slidesPerView: 3,
+            spaceBetween: 15
+          },
+          1286: {
+            slidesPerView: 4,
+            spaceBetween: 15
+          }
+        }}
+        freeMode={true}
+        pagination={{
+          clickable: true
+        }}
+        modules={[FreeMode, Pagination]}
+        className='max-w-[90%] lg:max-w-[82%]'
+        >
+          {exampleData.map(item => {
+            return(
+              <SwiperSlide key={item.songPhoto}>
+                <MusicCard songName={item.songName} songArtist={item.songArtist} songPhoto={item.songPhoto} spotifyLink={item.spotifyLink} ytmusicLink={item.ytmusicLink}/>
+              </SwiperSlide>
+            )
+          })}
+          
+        </Swiper>
+      </div>
+      
     </div>
   );
 }
