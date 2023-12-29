@@ -8,7 +8,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 function Navbar() {
     let location = useLocation();
-    console.log(location.pathname);
     return (
         <div className={`grid grid-cols-4 text-white bg-black-100 mt-24 h-28 rounded-[64px]`}>
             <Link to={'/'} className={`flex justify-center items-center ${location.pathname != "/" ? "bg-red-50":""} rounded-l-[64px] ${location.pathname != "/" ? "hover:bg-red-100":""} `}>
