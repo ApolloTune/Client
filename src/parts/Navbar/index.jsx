@@ -10,7 +10,7 @@ function Navbar() {
     let location = useLocation();
     return (
         <div className={`grid grid-cols-4 text-white bg-black-100 mt-24 h-28 rounded-[64px]`}>
-            <Link to={'/'} className={`flex justify-center items-center ${location.pathname != "/" ? "bg-red-50":""} rounded-l-[64px] ${location.pathname != "/" ? "hover:bg-red-100":""} `}>
+            <Link to={'/?page=1'} className={`flex justify-center items-center ${location.pathname != "/" ? "bg-red-50":""} rounded-l-[64px] ${location.pathname != "/" ? "hover:bg-red-100":""} `}>
                 <FontAwesomeIcon className='w-9 h-9' icon={faKey} />
             </Link>
             <Link to={'/dogal-dil-arama'} className={`flex justify-center items-center ${location.pathname != "/dogal-dil-arama" ? "bg-red-50":""}  ${location.pathname != "/dogal-dil-arama" ? "hover:bg-red-100":""}`}>
