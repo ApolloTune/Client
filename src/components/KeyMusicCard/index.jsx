@@ -7,7 +7,7 @@ function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink, ytmusicLin
   return (
     <div className='container flex justify-center mt-4'>
       <div className='flex flex-row items-center bg-blue-50 px-4 py-3 rounded-[28px] w-full max-w-[400px]'>
-        <img className='w-10 h-10 border-2 border-red-100 rounded-full' src="/Images/apollo.png" alt="Logo" />
+        <img className='w-10 h-10 border-2 border-red-100 rounded-full' src="https://raw.githubusercontent.com/ApolloTune/Client/main/Images/apollo.png" alt="Logo" />
         <img className='w-16 h-16 ml-4 border-2 border-white' src={songPhoto} alt="Music Foto" />
         <div className='flex flex-col items-center ml-2'>
           <p style={{ color: "black" }} className="font-sansi font-black italic text-sm tracking-wider mr-auto">{songName}</p>
