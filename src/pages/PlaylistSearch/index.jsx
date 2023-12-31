@@ -13,7 +13,7 @@ function PlaylistSearch() {
         Türkçe Spotify Playlist'inizin linkini girin ruh halinizin nasıl olduğunu bulalım.
       </p>
       <div className='mx-auto mt-6 flex flex-col items-center bg-blue-50 pt-2 pb-5 px-4 rounded-[28px] w-3/4'>
-        <img className='w-72 h-56 rounded-[30px]' src="/Images/AskAI.jpeg" alt="Ai photo" />
+        <img className='w-72 h-56 rounded-[30px]' src="https://raw.githubusercontent.com/ApolloTune/Client/main/Images/AskAI.jpeg" alt="Ai photo" />
         <p className='font-sansi text-[12px] italic tracking-wider'>
           Playlistinizin çoğunluğunu <span className="text-red-500">aşk</span> şarkıları oluşturuyor
         </p>
