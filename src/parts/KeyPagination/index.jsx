@@ -31,7 +31,7 @@ function KeyPagination() {
         </button>
         {renderPageButtons()}
         <button className='hover:bg-slate-100'>
-          <Link to={`${location.pathname}?page=${searchParams.get('page') < pageCount ? parseInt(searchParams.get('page')) + 1 : pageCount}`}>
+          <Link  to={`${location.pathname}?page=${searchParams.get('page') !== null && searchParams.get('page') < pageCount ? parseInt(searchParams.get('page')) + 1 : 2}`}>
             <FontAwesomeIcon icon={faChevronRight} />
           </Link>
         </button>
