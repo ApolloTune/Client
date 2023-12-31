@@ -3,7 +3,7 @@ ApolloTune projesi kullanıcıların doğal dil yoluyla müzikle ilgili önerile
 
 ## Kurulum
 
-**Projeyi yerel makinenize klonlayın**
+**Projeyi yerel makinenize klonlayın**  
 `
 git clone https://github.com/ApolloTune/Client.git
 `
@@ -11,11 +11,11 @@ git clone https://github.com/ApolloTune/Client.git
 `
 cd Client
 `
-**Gerekli bağımlılıkları yükleyin:**  
+**Gerekli bağımlılıkları yükleyin:**   
 `
 npm install
 `
-**Uygulamayı Bilgisayarınızda Çalıştırın:** 
+**Uygulamayı Bilgisayarınızda Çalıştırın:**   
 `
 npm run dev
 `
