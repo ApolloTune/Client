@@ -5,20 +5,20 @@ ApolloTune projesi kullanıcıların doğal dil yoluyla müzikle ilgili önerile
 
 **Projeyi yerel makinenize klonlayın**  
 `
-git clone https://github.com/ApolloTune/Client.git  
-`
+git clone https://github.com/ApolloTune/Client.git
+`  
 **Proje dizinine gidin:**  
 `
-cd Client  
-`
+cd Client
+`  
 **Gerekli bağımlılıkları yükleyin:**   
 `
-npm install  
-`
+npm install
+`  
 **Uygulamayı Bilgisayarınızda Çalıştırın:**   
 `
-npm run dev  
-`
+npm run dev
+`  
 
 ## Front-end için Kullanılan Teknolojiler 
 - **Ui Tasarımı:** Figma
