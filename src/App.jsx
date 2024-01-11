@@ -7,7 +7,7 @@ import SuggestionSearch from "./pages/SuggestionSearch"
 import PlaylistSearch from "./pages/PlaylistSearch"
 import Footer from "./parts/Footer";
 function App() {
-
+// Bu bir yorum satırıdır.
   return (
     <>
       <Header />
