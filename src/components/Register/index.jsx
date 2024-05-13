@@ -12,19 +12,28 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import validations from './Validation'
+import { signUp } from '../../api/authentication'
+import { useAuth } from '../../contexts/AuthContext'
 function Register({ register, closeDialog }) {
-
+  const { LoginIn } = useAuth();
   const { handleSubmit, handleChange, values, handleBlur, errors, touched } = useFormik({
     initialValues: {
       name: "",
-      userName: "",
+      lastName: "",
       email: "",
       password: "",
       passwordRepeat: ""
     },
     onSubmit: async (values, bag) => {
       try {
-        console.log("User registered");
+        debugger
+        const registerResponse = await signUp({
+          firstname: values.name,
+          lastname: values.lastName,
+          email: values.email,
+          password: values.password
+        })
+        LoginIn(registerResponse.data);
         closeDialog();
       } catch (error) {
         bag.setErrors({ general: error });
@@ -54,16 +63,16 @@ function Register({ register, closeDialog }) {
             fullWidth
           />
           <TextField
-            error={Boolean(errors.userName && touched.userName)}
+            error={Boolean(errors.lastName && touched.lastName)}
             margin='dense'
-            label="User Name"
-            id='userName'
-            name='userName'
+            label="Last Name"
+            id='lastName'
+            name='lastName'
             type='text'
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.userName}
-            helperText={errors.userName && touched.userName && `${errors.userName}`}
+            value={values.lastName}
+            helperText={errors.lastName && touched.lastName && `${errors.lastName}`}
             fullWidth
           />
           <TextField

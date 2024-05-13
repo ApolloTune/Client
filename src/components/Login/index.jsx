@@ -20,7 +20,6 @@ function Login({ login, closeDialog }) {
         },
         onSubmit: async (values, bag) => {
             try {
-                debugger;
                 const loginResponse = await loginIn({email:values.email, password: values.password})
                 LoginIn(loginResponse.data);
                 closeDialog();
