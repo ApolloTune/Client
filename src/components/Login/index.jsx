@@ -9,7 +9,10 @@ import {
 } from '@mui/material'
 import { useFormik } from 'formik'
 import validations from './Validation'
+import { loginIn } from '../../api/authentication'
+import { useAuth } from '../../contexts/AuthContext'
 function Login({ login, closeDialog }) {
+    const { LoginIn } = useAuth();
     const { handleSubmit, handleChange, values, handleBlur, errors, touched } = useFormik({
         initialValues: {
             email: "",
@@ -17,7 +20,9 @@ function Login({ login, closeDialog }) {
         },
         onSubmit: async (values, bag) => {
             try {
-                console.log("User logged in");
+                debugger;
+                const loginResponse = await loginIn({email:values.email, password: values.password})
+                LoginIn(loginResponse.data);
                 closeDialog();
             } catch (error) {
                 bag.setErrors({ general: error.response.data.mesaj });
@@ -64,6 +69,7 @@ function Login({ login, closeDialog }) {
                 <DialogActions sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <button
                         className='rounded-full bg-pink-50 w-80 flex justify-center items-center'
+                        type='submit'
                     >
                         <p className='font-mono text-2xl font-semibold tracking-wider not-italic text-white'>Entry</p>
                     </button>

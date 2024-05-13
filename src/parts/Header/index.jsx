@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket, faUserPlus, faCircleInfo, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket, faUserPlus, faCircleInfo, faBars, faTimes, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Login from '../../components/Login'
 import Register from '../../components/Register';
+import { useAuth } from '../../contexts/AuthContext';
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
-
+  const { loggedIn, Logout } = useAuth();
   const closeDialog = () => {
     setLogin(false);
     setRegister(false);
@@ -52,27 +53,40 @@ function Header() {
         </div>
 
         <nav className={`mt-2 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 ${menuOpen && windowWidth < 768 ? 'block' : 'hidden'}`}>
-          <button>
-            <FontAwesomeIcon onClick={openRegister} className='w-9 h-9 hover:underline' icon={faUserPlus} />
-          </button>
+          {!loggedIn &&
+            <>
+              <button>
+                <FontAwesomeIcon onClick={openRegister} className='w-9 h-9 hover:underline' icon={faUserPlus} />
+              </button>
 
-          <button>
-            <FontAwesomeIcon onClick={openLogin} className='w-9 h-9 hover:underline' icon={faRightFromBracket} />
-          </button>
-
+              <button>
+                <FontAwesomeIcon onClick={openLogin} className='w-9 h-9 hover:underline' icon={faRightToBracket} />
+              </button>
+            </>
+          }
           <button>
             <FontAwesomeIcon className='w-9 h-9 hover:underline' icon={faCircleInfo} />
           </button>
         </nav>
 
         <nav className={`hidden md:flex space-x-24 ${menuOpen ? 'flex flex-row' : 'hidden'}`}>
-          <button>
-            <FontAwesomeIcon onClick={openRegister} className='w-9 h-9' icon={faUserPlus} />
-          </button>
+          {!loggedIn &&
+            <>
+              <button>
+                <FontAwesomeIcon onClick={openRegister} className='w-9 h-9' icon={faUserPlus} />
+              </button>
 
-          <button>
-            <FontAwesomeIcon onClick={openLogin} className='w-9 h-9' icon={faRightFromBracket} />
-          </button>
+              <button>
+                <FontAwesomeIcon onClick={openLogin} className='w-9 h-9' icon={faRightToBracket} />
+              </button>
+            </>
+          }
+          {
+            loggedIn &&
+            <button>
+                <FontAwesomeIcon onClick={Logout} className='w-9 h-9' icon={faRightFromBracket} />
+              </button>
+          }
           <a href="https://github.com/ApolloTune" target='_blank'>
             <button>
               <FontAwesomeIcon className='w-9 h-9' icon={faCircleInfo} />

@@ -7,7 +7,7 @@ const AuthProvider = ({ children }) => {
 
     const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : null);
 
-    const Login = async (response) => {
+    const LoginIn = async (response) => {
         setToken(response.token);
         localStorage.setItem("token", response.token);
         setLoggedIn(true);
@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
         setLoggedIn,
         token,
         setToken,
-        Login,
+        LoginIn,
         Logout
     }
     return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
