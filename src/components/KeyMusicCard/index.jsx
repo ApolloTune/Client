@@ -6,7 +6,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
   return (
     <div className='container flex justify-center mt-4'>
-      <div className='flex flex-row items-center bg-blue-50 px-4 py-3 rounded-[28px] w-full max-w-[400px]'>
+      <div className='flex flex-row items-center bg-blue-50 px-4 py-3 rounded-[28px] sm:w-96'>
         <img className='w-10 h-10 border-2 border-red-100 rounded-full' src="https://raw.githubusercontent.com/ApolloTune/Client/main/Images/apollo.png" alt="Logo" />
         <img className='w-16 h-16 ml-4 border-2 border-white' src={songPhoto} alt="Music Foto" />
         <div className='flex flex-col items-center ml-2'>
