@@ -26,7 +26,6 @@ function Register({ register, closeDialog }) {
     },
     onSubmit: async (values, bag) => {
       try {
-        debugger
         const registerResponse = await signUp({
           firstname: values.name,
           lastname: values.lastName,

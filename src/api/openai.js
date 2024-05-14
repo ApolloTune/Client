@@ -20,7 +20,7 @@ const favoriteSearchWithSpotify = async() => {
     return response
 }
 const sentenceSearchWithSpotify = async(input) => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/openai/sentencesearchrequest`, input, setAuth())
+    const response = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/openai/sentencesearchrequest`, input, setAuth())
     return response
 }
 const fortuneTellingByPlaylist = async(input) => {
