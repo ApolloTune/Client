@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Dialog, 
+    Dialog,
     TextField,
     DialogActions,
     DialogContent,
@@ -20,7 +20,7 @@ function Login({ login, closeDialog }) {
         },
         onSubmit: async (values, bag) => {
             try {
-                const loginResponse = await loginIn({email:values.email, password: values.password})
+                const loginResponse = await loginIn({ email: values.email, password: values.password })
                 LoginIn(loginResponse.data);
                 closeDialog();
             } catch (error) {

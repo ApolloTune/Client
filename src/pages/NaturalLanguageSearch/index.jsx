@@ -11,17 +11,40 @@ import { FreeMode, Pagination } from 'swiper/modules';
 import { useFormik } from 'formik'
 import { sentenceSearchWithSpotify } from '../../api/openai';
 import { useQuery } from 'react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { CircularProgress, LinearProgress } from '@mui/material';
+import Stack from '@mui/material/Stack';
+
+
 function NaturalLanguageSearch() {
   const [data, setData] = useState([]);
+  const [readyData, setReadyData] = useState(true)
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          return 0;
+        }
+        const diff = Math.random() * 10;
+        return Math.min(oldProgress + diff, 100);
+      });
+    }, 500);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   const { handleSubmit, handleChange, values, handleBlur, errors, touched } = useFormik({
     initialValues: {
       sentence: ""
     },
     onSubmit: async (values, bag) => {
       try {
+        setReadyData(false);
         let response = await sentenceSearchWithSpotify({ sentence: values.sentence });
         setData(response)
+        setReadyData(true);
       } catch (error) {
         bag.setErrors({ general: error.response.data.mesaj });
       }
@@ -44,7 +67,14 @@ function NaturalLanguageSearch() {
         <p className="italic tracking-wide text-white mt-2 mx-auto">
           örn: Bugün çok enerjik hissediyorum bana uygun Türkçe pop müzikleri öner.
         </p>
-        <div className='flex items-center justify-center flex flex-col'>
+        {
+          !readyData && <div className='flex items-center justify-center flex-col'>
+            <Stack sx={{ width: '76%', color: 'grey.500', mt: 2 }} spacing={2}>
+              <LinearProgress variant='determinate' color="success" value={progress} />
+            </Stack>
+          </div>
+        }
+        <div className='flex items-center justify-center flex flex-col mb-2'>
           <Swiper breakpoints={{
             475: {
               slidesPerView: 2,
