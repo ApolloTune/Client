@@ -11,7 +11,7 @@ const setAuth = () => {
 
 
 const keySearchWithSpotify = async(input) => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/openai/keysearchrequest`, input, setAuth());
+    const response = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/openai/keysearchrequest`, input, setAuth());
     return response
 }
 

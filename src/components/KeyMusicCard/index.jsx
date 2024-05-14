@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink, ytmusicLink }) {
+function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
   return (
     <div className='container flex justify-center mt-4'>
       <div className='flex flex-row items-center bg-blue-50 px-4 py-3 rounded-[28px] w-full max-w-[400px]'>
@@ -18,9 +18,6 @@ function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink, ytmusicLin
             <FontAwesomeIcon className='w-6 h-6' style={{ color: "black" }} icon={faSpotify} />
           </a>
           <FontAwesomeIcon className='w-6 h-6' style={{ color: "black" }} icon={faHeart} />
-          <a href={ytmusicLink} target='_blank' rel='noopener noreferrer'>
-            <FontAwesomeIcon className='w-6 h-6' style={{ color: "black" }} icon={faYoutube} />
-          </a>
         </div>
       </div>
     </div>

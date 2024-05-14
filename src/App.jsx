@@ -14,7 +14,7 @@ function App() {
       <div className="container mx-auto md:px-14 lg:px-36 bg-black-50">
         <Navbar />
         <Routes>
-          <Route path="/" element={<KeywordSearch />} />
+          <Route path="/" element={<KeywordSearch/>} />
           <Route path="/dogal-dil-arama" element={<NaturalLanguageSearch />} />
           <Route path="/begenilen-sarki-oneri" element={<SuggestionSearch />} />
           <Route path="/playlist-fal" element={<PlaylistSearch />} />

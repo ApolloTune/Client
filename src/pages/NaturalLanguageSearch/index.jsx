@@ -10,10 +10,8 @@ import exampleData from '../../../JsonTestData/musicList';
 import { FreeMode, Pagination } from 'swiper/modules';
 import { useFormik } from 'formik'
 import { sentenceSearchWithSpotify } from '../../api/openai';
-import { useQuery } from 'react-query';
 import { useState, useEffect } from 'react';
-import { CircularProgress, LinearProgress } from '@mui/material';
-import Stack from '@mui/material/Stack';
+import { LinearProgress, Stack } from '@mui/material';
 
 
 function NaturalLanguageSearch() {
@@ -35,7 +33,7 @@ function NaturalLanguageSearch() {
       clearInterval(timer);
     };
   }, []);
-  const { handleSubmit, handleChange, values, handleBlur, errors, touched } = useFormik({
+  const { handleSubmit, handleChange, values, handleBlur } = useFormik({
     initialValues: {
       sentence: ""
     },
@@ -46,7 +44,7 @@ function NaturalLanguageSearch() {
         setData(response)
         setReadyData(true);
       } catch (error) {
-        bag.setErrors({ general: error.response.data.mesaj });
+        bag.setErrors({ general: error });
       }
     }
 
