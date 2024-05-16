@@ -144,7 +144,7 @@ function KeywordSearch() {
             ).map((item, index) => {
               return (
                 <KeyMusicCard
-                  key={index}
+                  key={item.spotifyLink}
                   songName={item.songName}
                   songArtist={item.songArtist}
                   songPhoto={item.songPhoto}
@@ -161,7 +161,7 @@ function KeywordSearch() {
             ).map((item, index) => {
               return (
                 <KeyMusicCard
-                  key={index}
+                  key={item.spotifyLink}
                   songName={item.songName}
                   songArtist={item.songArtist}
                   songPhoto={item.songPhoto}

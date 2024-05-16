@@ -18,7 +18,7 @@ const getFavoriteSongs = async () => {
     return response
 }
 const deleteFavoriteSong = async (input) => {
-    const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/song/deletefavoritesong`, input, setAuth());
+    const response = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/song/deletefavoritesong`, { ...setAuth(), data: input });
     return response
 }
 

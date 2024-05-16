@@ -16,7 +16,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/material": "^5.15.0",
+    "@mui/material": "^5.15.18",
     "@tailwindcss/typography": "^0.5.10",
     "axios": "^1.6.2",
     "dotenv": "^16.4.5",

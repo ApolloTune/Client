@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
         setToken(response.token);
         localStorage.setItem("token", response.token);
         setLoggedIn(true);
+        window.location.href = "/";
     }
     const Logout = () => {
         setLoggedIn(false);
