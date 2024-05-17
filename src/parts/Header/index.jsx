@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket, faUserPlus, faCircleInfo, faBars, faTimes, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket, faUserPlus, faCircleInfo, faBars, faTimes, faRightToBracket, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Login from '../../components/Login'
 import Register from '../../components/Register';
@@ -84,8 +84,16 @@ function Header() {
           {
             loggedIn &&
             <button>
-                <FontAwesomeIcon onClick={Logout} className='w-9 h-9' icon={faRightFromBracket} />
-              </button>
+              <Link to={'/favorite-songs'}>
+                <FontAwesomeIcon className='w-9 h-9' icon={faHeart} />
+              </Link>
+            </button>
+          }
+          {
+            loggedIn &&
+            <button>
+              <FontAwesomeIcon onClick={Logout} className='w-9 h-9' icon={faRightFromBracket} />
+            </button>
           }
           <a href="https://github.com/ApolloTune" target='_blank'>
             <button>

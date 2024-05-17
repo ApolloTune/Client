@@ -5,9 +5,9 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { getFavoriteSongs, addFavoriteSong, deleteFavoriteSong } from '../../api/crudSong';
-
+import { useQueryClient } from 'react-query';
 function MusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
-  //    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const [isFavorite, setIsFavorite] = useState(false);
   const { loggedIn } = useAuth();
   useEffect(() => {
@@ -23,7 +23,7 @@ function MusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
       try {
         await addFavoriteSong({ songname: songName, songartist: songArtist, songphoto: songPhoto, spotifylink: spotifyLink })
         setIsFavorite(!isFavorite)
-        //queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
+        queryClient.invalidateQueries(['favoritesOfUser']);
       } catch (error) {
         console.log(error);
       }
@@ -31,7 +31,7 @@ function MusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
       try {
         await deleteFavoriteSong({ favSongName: songName });
         setIsFavorite(!isFavorite)
-        //queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
+        queryClient.invalidateQueries(['favoritesOfUser']);
       } catch (error) {
         console.log(error);
       }
