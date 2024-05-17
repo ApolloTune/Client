@@ -63,7 +63,7 @@ function NaturalLanguageSearch() {
           value={values.sentence}
         />
         <p className="italic tracking-wide text-white mt-2 mx-auto">
-          örn: Bugün çok enerjik hissediyorum bana uygun Türkçe pop müzikleri öner.
+        ex: I'm very, very happy today, suggest some songs for me.
         </p>
         {
           !readyData && <div className='flex items-center justify-center flex-col'>

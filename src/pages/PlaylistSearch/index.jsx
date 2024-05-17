@@ -68,7 +68,10 @@ function PlaylistSearch() {
           value={values.search}
         />
         <p className="italic tracking-wide text-white mt-2 mx-auto">
-          Türkçe Spotify Playlist'inizin linkini girin ruh halinizin nasıl olduğunu bulalım.
+        Enter the link to your Turkish Spotify Playlist and we'll find out what your mood is like.
+        </p>
+        <p className="italic tracking-wide text-white mx-auto">
+        For now, we only read Turkish fortunes for Turkish songs.
         </p>
         {
           !readyData && <div className='flex items-center justify-center flex-col'>
