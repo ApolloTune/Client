@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpotify, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -18,18 +18,22 @@ function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
   }, [isFavorite])
   const handleFavoriteClick = async () => {
     if (!isFavorite) {
-      await addFavoriteSong({ songname: songName, songartist: songArtist, songphoto: songPhoto, spotifylink: spotifyLink })
-      setIsFavorite(!isFavorite)
-      //queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
+      try {
+        await addFavoriteSong({ songname: songName, songartist: songArtist, songphoto: songPhoto, spotifylink: spotifyLink })
+        setIsFavorite(!isFavorite)
+        //queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
+      } catch (error) {
+        console.log(error);
+      }
+
     } else {
       try {
         await deleteFavoriteSong({ favSongName: songName });
         setIsFavorite(!isFavorite)
+        //queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
       } catch (error) {
         console.log(error);
       }
-      
-      //queryClient.invalidateQueries(['kullaniciFavorileri', user._id]);
     }
   }
   return (
@@ -45,8 +49,7 @@ function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
           <a href={spotifyLink} target='_blank' rel='noopener noreferrer'>
             <FontAwesomeIcon className='w-6 h-6' style={{ color: "black" }} icon={faSpotify} />
           </a>
-          {/* red */}
-          {!isFavorite ? <FontAwesomeIcon onClick={handleFavoriteClick} className='w-6 h-6' style={{ color: "black" }} icon={faHeart} /> : <FontAwesomeIcon className='w-6 h-6' style={{ color: "red" }} icon={faHeart} onClick={handleFavoriteClick}/>}
+          {!isFavorite ? <FontAwesomeIcon onClick={handleFavoriteClick} className='w-6 h-6' style={{ color: "black" }} icon={faHeart} /> : <FontAwesomeIcon className='w-6 h-6' style={{ color: "red" }} icon={faHeart} onClick={handleFavoriteClick} />}
         </div>
       </div>
     </div>
