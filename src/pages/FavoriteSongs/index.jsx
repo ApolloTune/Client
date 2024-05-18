@@ -2,10 +2,9 @@ import React from 'react'
 import { getFavoriteSongs } from '../../api/crudSong'
 import { useQuery } from 'react-query'
 import KeyMusicCard from '../../components/KeyMusicCard'
-import KeyPagination from '../../parts/KeyPagination'
-import { useAuth } from '../../contexts/AuthContext'
 import { useSearchParams } from 'react-router-dom'
 import FavoriteKeyPagination from '../../parts/FavoriteKeyPagination'
+import Warning from '../../components/Warning'
 function FavoriteSongs() {
     const [searchParams] = useSearchParams()
     const { isLoading, error, data } = useQuery(['favoritesOfUser'], () => getFavoriteSongs());
@@ -14,7 +13,7 @@ function FavoriteSongs() {
         </div>
     }
     if (error) {
-        return <div>{error.message}</div>
+        return <Warning message={error.message} />
     }
 
     return (

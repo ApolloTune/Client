@@ -3,10 +3,14 @@ import exampleData from '../../../JsonTestData/musicList'
 import { LinearProgress, Stack } from '@mui/material';
 import { favoriteSearchWithSpotify } from '../../api/openai';
 import { useState, useEffect } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import Warning from '../../components/Warning';
 function SuggestionSearch() {
+  const { loggedIn } = useAuth()
   const [data, setData] = useState([])
   const [readyData, setReadyData] = useState(true)
   const [progress, setProgress] = useState(0)
+  const [error, setError] = useState("")
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
@@ -23,12 +27,16 @@ function SuggestionSearch() {
   }, []);
   const handleClick = async () => {
     try {
-      setReadyData(false);
-      let response = await favoriteSearchWithSpotify()
-      setData(response)
-      setReadyData(true)
+      if (loggedIn) {
+        setReadyData(false);
+        let response = await favoriteSearchWithSpotify()
+        setData(response)
+        setReadyData(true)
+      }else{
+        setError("Please login")
+      }
     } catch (error) {
-      console.log(error);
+      setError(error.message)
     }
   }
   return (
@@ -41,6 +49,7 @@ function SuggestionSearch() {
           <LinearProgress variant='determinate' color="success" value={progress} />
         </Stack>
       </div>}
+      {error.length != 0 && <Warning message={error} />}
       <button
         className='flex justify-center items-center mx-auto h-11 mt-3 rounded-[4px] bg-white w-56 flex justify-start items-center pl-2 hover:bg-gray-200 mb-1' onClick={handleClick}
       >
@@ -53,7 +62,7 @@ function SuggestionSearch() {
           )
         }) : exampleData.map(item => {
           return (
-            <KeyMusicCard key={item.spotifyLink} songName={item.songName} songArtist={item.songArtist} songPhoto={item.songPhoto} spotifyLink={item.spotifyLink}/>
+            <KeyMusicCard key={item.spotifyLink} songName={item.songName} songArtist={item.songArtist} songPhoto={item.songPhoto} spotifyLink={item.spotifyLink} />
           )
         })}
       </div>

@@ -6,7 +6,10 @@ import { useSearchParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { LinearProgress, Stack } from '@mui/material';
 import { keySearchWithSpotify } from '../../api/openai';
+import { useAuth } from '../../contexts/AuthContext';
+import Warning from '../../components/Warning';
 function KeywordSearch() {
+  const { loggedIn } = useAuth()
   const [searchParams] = useSearchParams()
   const [data, setData] = useState([])
   const [readyData, setReadyData] = useState(true)
@@ -27,7 +30,7 @@ function KeywordSearch() {
       clearInterval(timer);
     };
   }, []);
-  const { handleSubmit, handleChange, values } = useFormik({
+  const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       emotions: [],
       musicYears: [],
@@ -36,12 +39,16 @@ function KeywordSearch() {
     },
     onSubmit: async (values, bag) => {
       try {
-        setReadyData(false);
-        let response = await keySearchWithSpotify(values)
-        setData(response);
-        setReadyData(true);
+        if (loggedIn) {
+          setReadyData(false);
+          let response = await keySearchWithSpotify(values)
+          setData(response);
+          setReadyData(true);
+        } else {
+          bag.setErrors({ general: "Please login" })
+        }
       } catch (error) {
-        bag.setErrors({ general: error })
+        bag.setErrors({ general: error.message })
       }
     }
   })
@@ -53,6 +60,7 @@ function KeywordSearch() {
             <LinearProgress variant='determinate' color="success" value={progress} />
           </Stack>
         </div>}
+        {errors.general && <Warning message={errors.general} />}
         <div className='grid sm:grid-cols-1 xl:grid-cols-2 w-full max-w-screen-lg mx-auto'>
           <div className="mx-auto mt-2">
             <div className='grid sm:grid-cols-1 xl:grid-cols-2 gap-x-16 gap-y-8'>

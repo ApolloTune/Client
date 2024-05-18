@@ -12,9 +12,11 @@ import { useFormik } from 'formik'
 import { sentenceSearchWithSpotify } from '../../api/openai';
 import { useState, useEffect } from 'react';
 import { LinearProgress, Stack } from '@mui/material';
-
+import { useAuth } from '../../contexts/AuthContext';
+import Warning from '../../components/Warning';
 
 function NaturalLanguageSearch() {
+  const { loggedIn } = useAuth()
   const [data, setData] = useState([]);
   const [readyData, setReadyData] = useState(true)
   const [progress, setProgress] = useState(0);
@@ -33,18 +35,22 @@ function NaturalLanguageSearch() {
       clearInterval(timer);
     };
   }, []);
-  const { handleSubmit, handleChange, values, handleBlur } = useFormik({
+  const { handleSubmit, handleChange, values, handleBlur, errors } = useFormik({
     initialValues: {
       sentence: ""
     },
     onSubmit: async (values, bag) => {
       try {
-        setReadyData(false);
-        let response = await sentenceSearchWithSpotify({ sentence: values.sentence });
-        setData(response)
-        setReadyData(true);
+        if (loggedIn) {
+          setReadyData(false);
+          let response = await sentenceSearchWithSpotify({ sentence: values.sentence });
+          setData(response)
+          setReadyData(true);
+        } else {
+          bag.setErrors({ general: "Please login" })
+        }
       } catch (error) {
-        bag.setErrors({ general: error });
+        bag.setErrors({ general: error.message });
       }
     }
 
@@ -63,7 +69,7 @@ function NaturalLanguageSearch() {
           value={values.sentence}
         />
         <p className="italic tracking-wide text-white mt-2 mx-auto">
-        ex: I'm very, very happy today, suggest some songs for me.
+          ex: I'm very, very happy today, suggest some songs for me.
         </p>
         {
           !readyData && <div className='flex items-center justify-center flex-col'>
@@ -72,6 +78,7 @@ function NaturalLanguageSearch() {
             </Stack>
           </div>
         }
+        {errors.general && <Warning message={errors.general} />}
         <div className='flex items-center justify-center flex flex-col mb-2'>
           <Swiper breakpoints={{
             475: {

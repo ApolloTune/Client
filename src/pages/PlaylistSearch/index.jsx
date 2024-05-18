@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import { useFormik } from 'formik'
 import { fortuneTellingByPlaylist } from '../../api/openai';
 import { LinearProgress, Stack } from '@mui/material';
-
+import { useAuth } from '../../contexts/AuthContext';
+import Warning from '../../components/Warning';
 function PlaylistSearch() {
+  const { loggedIn } = useAuth()
+
   const [readyData, setReadyData] = useState(true)
   const [image, setImage] = useState("../../Images/love/love3.jpeg")
   const [label, setLabel] = useState("aşk")
@@ -24,29 +27,33 @@ function PlaylistSearch() {
       clearInterval(timer);
     };
   }, []);
-  const { handleSubmit, handleChange, values, handleBlur } = useFormik({
+  const { handleSubmit, handleChange, values, handleBlur, errors } = useFormik({
     initialValues: {
       search: ""
     },
     onSubmit: async (values, bag) => {
       try {
-        setReadyData(false)
-        let response = await fortuneTellingByPlaylist({spotifyPlayList: values.search})
-        if(response.data.emotion == "hareketli" || response.data.emotion == "enerjik"){
-          //"../../Images/love/love3.jpeg"
-          setImage("../../Images/energetic/energetic"+(Math.floor(Math.random() * 4) + 1)+".jpeg")
-        }else if(response.data.emotion == "arabesk"){
-          setImage("../../Images/arabesque/arabesque"+(Math.floor(Math.random() * 6) + 1)+".jpeg")
-        }else if (response.data.emotion == "ask" || response.data.emotion=="aşk"){
-          setImage("../../Images/love/love"+(Math.floor(Math.random() * 4) + 1)+".jpeg")
-        }else{
-          setImage("../../Images/motivation/motivation"+(Math.floor(Math.random() * 4) + 1)+".png")
+        if (loggedIn) {
+          setReadyData(false)
+          let response = await fortuneTellingByPlaylist({ spotifyPlayList: values.search })
+          if (response.data.emotion == "hareketli" || response.data.emotion == "enerjik") {
+            //"../../Images/love/love3.jpeg"
+            setImage("../../Images/energetic/energetic" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
+          } else if (response.data.emotion == "arabesk") {
+            setImage("../../Images/arabesque/arabesque" + (Math.floor(Math.random() * 6) + 1) + ".jpeg")
+          } else if (response.data.emotion == "ask" || response.data.emotion == "aşk") {
+            setImage("../../Images/love/love" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
+          } else {
+            setImage("../../Images/motivation/motivation" + (Math.floor(Math.random() * 4) + 1) + ".png")
+          }
+          setLabel(response.data.emotion)
+          setReview(response.data.fortune_telling)
+          setReadyData(true)
+        } else {
+          bag.setErrors({ general: "Please login" })
         }
-        setLabel(response.data.emotion)
-        setReview(response.data.fortune_telling)
-        setReadyData(true)
       } catch (error) {
-        bag.setErrors({ general: error })
+        bag.setErrors({ general: error.message })
       }
     }
   })
@@ -68,10 +75,10 @@ function PlaylistSearch() {
           value={values.search}
         />
         <p className="italic tracking-wide text-white mt-2 mx-auto">
-        Enter the link to your Turkish Spotify Playlist and we'll find out what your mood is like.
+          Enter the link to your Turkish Spotify Playlist and we'll find out what your mood is like.
         </p>
         <p className="italic tracking-wide text-white mx-auto">
-        For now, we only read Turkish fortunes for Turkish songs.
+          For now, we only read Turkish fortunes for Turkish songs.
         </p>
         {
           !readyData && <div className='flex items-center justify-center flex-col'>
@@ -80,6 +87,7 @@ function PlaylistSearch() {
             </Stack>
           </div>
         }
+        {errors.general && <Warning message={errors.general} />}
         <div className='mx-auto mt-6 flex flex-col items-center bg-blue-50 pt-2 pb-5 px-4 rounded-[28px] w-3/4 mb-3'>
           <img className='w-72 h-56 rounded-[30px]' src={image} alt="Ai photo" />
           <p className='font-sansi text-[12px] italic tracking-wider'>
