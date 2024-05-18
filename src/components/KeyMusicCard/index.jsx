@@ -8,32 +8,37 @@ import { getFavoriteSongs, addFavoriteSong, deleteFavoriteSong } from '../../api
 function KeyMusicCard({ songName, songArtist, songPhoto, spotifyLink }) {
   const queryClient = useQueryClient();
   const [isFavorite, setIsFavorite] = useState(false);
-  const { loggedIn } = useAuth();
+  const { loggedIn, Logout } = useAuth();
   useEffect(() => {
     const fetchData = async () => {
       if (!loggedIn) return;
-      const favoritesOfUser = await getFavoriteSongs();
-      setIsFavorite(favoritesOfUser.data.some((song) => song.songname === songName));
+      try {
+        const favoritesOfUser = await getFavoriteSongs();
+        setIsFavorite(favoritesOfUser.data.some((song) => song.songname === songName));
+      } catch (error) {
+        Logout()
+      }
+
     };
     fetchData();
   }, [isFavorite])
   const handleFavoriteClick = async () => {
-    if (!isFavorite) {
+    if (!isFavorite && loggedIn) {
       try {
         await addFavoriteSong({ songname: songName, songartist: songArtist, songphoto: songPhoto, spotifylink: spotifyLink })
         setIsFavorite(!isFavorite)
         queryClient.invalidateQueries(['favoritesOfUser']);
       } catch (error) {
-        console.log(error);
+        Logout()
       }
 
-    } else {
+    } else if (loggedIn) {
       try {
         await deleteFavoriteSong({ favSongName: songName });
         setIsFavorite(!isFavorite)
         queryClient.invalidateQueries(['favoritesOfUser']);
       } catch (error) {
-        console.log(error);
+        Logout()
       }
     }
   }
