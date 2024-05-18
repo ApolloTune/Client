@@ -14,6 +14,7 @@ import { useFormik } from 'formik'
 import validations from './Validation'
 import { signUp } from '../../api/authentication'
 import { useAuth } from '../../contexts/AuthContext'
+import Warning from '../Warning'
 function Register({ register, closeDialog }) {
   const { LoginIn } = useAuth();
   const { handleSubmit, handleChange, values, handleBlur, errors, touched } = useFormik({
@@ -35,7 +36,7 @@ function Register({ register, closeDialog }) {
         LoginIn(registerResponse.data);
         closeDialog();
       } catch (error) {
-        bag.setErrors({ general: error });
+        bag.setErrors({ general: error.message });
       }
     },
     validationSchema: validations
@@ -47,7 +48,7 @@ function Register({ register, closeDialog }) {
           <Typography variant='h4' gutterBottom sx={{ fontWeight: "bold", fontFamily: "sans-serif" }}>Register</Typography>
         </DialogTitle>
         <DialogContent>
-          {errors.general && <Uyari mesaj={"This user is already registered"} />}
+          {errors.general && <Warning message={"This user is already registered"} />}
           <TextField
             error={Boolean(errors.name && touched.name)}
             margin='dense'

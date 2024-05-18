@@ -11,6 +11,7 @@ import { useFormik } from 'formik'
 import validations from './Validation'
 import { loginIn } from '../../api/authentication'
 import { useAuth } from '../../contexts/AuthContext'
+import Warning from '../Warning'
 function Login({ login, closeDialog }) {
     const { LoginIn } = useAuth();
     const { handleSubmit, handleChange, values, handleBlur, errors, touched } = useFormik({
@@ -24,7 +25,7 @@ function Login({ login, closeDialog }) {
                 LoginIn(loginResponse.data);
                 closeDialog();
             } catch (error) {
-                bag.setErrors({ general: error.response.data.mesaj });
+                bag.setErrors({ general: error.message });
             }
         },
         validationSchema: validations
@@ -36,7 +37,7 @@ function Login({ login, closeDialog }) {
                     <Typography variant='h4' gutterBottom sx={{ fontWeight: "bold", fontFamily: "sans-serif" }}>Login</Typography>
                 </DialogTitle>
                 <DialogContent>
-                    {errors.general && <Uyari mesaj={errors.general} />}
+                    {errors.general && <Warning message={"Your user information is incorrect"} />}
                     <TextField
                         error={Boolean(errors.email && touched.email)}
                         margin="dense"
