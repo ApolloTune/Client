@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import Warning from '../../components/Warning';
 function SuggestionSearch() {
-  const { loggedIn } = useAuth()
+  const { loggedIn, Logout } = useAuth()
   const [data, setData] = useState([])
   const [readyData, setReadyData] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -36,7 +36,12 @@ function SuggestionSearch() {
         setError("Please login")
       }
     } catch (error) {
-      setError(error.message)
+      if(error.message != "Request failed with status code 401"){
+        bag.setErrors({ general: error.message })
+      }
+      else{
+        Logout()
+      }
     }
   }
   return (

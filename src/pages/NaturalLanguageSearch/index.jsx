@@ -16,7 +16,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import Warning from '../../components/Warning';
 
 function NaturalLanguageSearch() {
-  const { loggedIn } = useAuth()
+  const { loggedIn, Logout } = useAuth()
   const [data, setData] = useState([]);
   const [readyData, setReadyData] = useState(true)
   const [progress, setProgress] = useState(0);
@@ -50,7 +50,12 @@ function NaturalLanguageSearch() {
           bag.setErrors({ general: "Please login" })
         }
       } catch (error) {
-        bag.setErrors({ general: error.message });
+        if(error.message != "Request failed with status code 401"){
+          bag.setErrors({ general: error.message })
+        }
+        else{
+          Logout()
+        }
       }
     }
 

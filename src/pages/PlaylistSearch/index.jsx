@@ -5,7 +5,7 @@ import { LinearProgress, Stack } from '@mui/material';
 import { useAuth } from '../../contexts/AuthContext';
 import Warning from '../../components/Warning';
 function PlaylistSearch() {
-  const { loggedIn } = useAuth()
+  const { loggedIn, Logout } = useAuth()
 
   const [readyData, setReadyData] = useState(true)
   const [image, setImage] = useState("../../Images/love/love3.jpeg")
@@ -53,7 +53,12 @@ function PlaylistSearch() {
           bag.setErrors({ general: "Please login" })
         }
       } catch (error) {
-        bag.setErrors({ general: error.message })
+        if(error.message != "Request failed with status code 401"){
+          bag.setErrors({ general: error.message })
+        }
+        else{
+          Logout()
+        }
       }
     }
   })
