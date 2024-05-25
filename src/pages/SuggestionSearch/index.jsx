@@ -56,10 +56,11 @@ function SuggestionSearch() {
       </div>}
       {error.length != 0 && <Warning message={error} />}
       <button
-        className='flex justify-center items-center mx-auto h-11 mt-3 rounded-[4px] bg-white w-56 flex justify-start items-center pl-2 hover:bg-gray-200 mb-1' onClick={handleClick}
-      >
-        <p className='font-sansi text-sm tracking-wider not-italic text-black'>Suggest Music</p>
-      </button>
+              className='mx-auto h-11 mt-3 rounded-3xl bg-white w-40 flex justify-center items-center  hover:bg-gray-100'
+              onClick={handleClick}
+            >
+              <p className='px-2 py-1 font-medium text-[16px] text-slate-900 not-italic text-black'>Suggest Music</p>
+            </button>
       <div className='grid lg:grid-cols-2 grid-cols-1 gap-2 mb-2'>
         {data.length != 0 ? data.data.map(item => {
           return (

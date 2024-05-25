@@ -141,9 +141,9 @@ function KeywordSearch() {
               </div>
             </div>
             <button
-              className='mx-auto h-11 mt-3 rounded-[6px] bg-white w-56 flex justify-start items-center pl-2 hover:bg-gray-200'
+              className='mx-auto h-11 mt-3 rounded-3xl bg-white w-40 flex justify-center items-center  hover:bg-gray-100  '
             >
-              <p className='font-sansi text-sm tracking-wider not-italic text-black'>Suggest Music</p>
+              <p className='px-2 py-1 font-medium text-[16px] text-slate-900 not-italic text-black'>Suggest Music</p>
             </button>
           </div>
           <div className='mx-auto'>
