@@ -124,20 +124,20 @@ function KeywordSearch() {
               </div>
               <div className='container flex justify-content text-white bg-red-50 p-2 rounded-[8px] w-[196px]'>
                 <div>
-                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="pop" value="ENGLISH" onChange={handleChange} checked={values.musicLanguages.includes("ENGLISH")} />
-                  <label className='ml-2 text-lg' htmlFor="pop">English</label><br />
-                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="rock" value="TURKISH" onChange={handleChange} checked={values.musicLanguages.includes("TURKISH")} />
-                  <label className='ml-2 text-lg' htmlFor="rock">Turkish</label><br />
-                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="rap" value="GERMAN" onChange={handleChange} checked={values.musicLanguages.includes("GERMAN")} />
-                  <label className='ml-2 text-lg' htmlFor="rap">German</label><br />
-                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="rap" value="FRENCH" onChange={handleChange} checked={values.musicLanguages.includes("FRENCH")} />
-                  <label className='ml-2 text-lg' htmlFor="rap">French</label><br />
-                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="rap" value="ITALIAN" onChange={handleChange} checked={values.musicLanguages.includes("ITALIAN")} />
-                  <label className='ml-2 text-lg' htmlFor="rap">Italian</label><br />
-                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="rap" value="PORTUGUESE" onChange={handleChange} checked={values.musicLanguages.includes("PORTUGUESE")} />
-                  <label className='ml-2 text-lg' htmlFor="rap">Portuguese</label><br />
-                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="rap" value="SPAIN" onChange={handleChange} checked={values.musicLanguages.includes("SPAIN")} />
-                  <label className='ml-2 text-lg' htmlFor="rap">Spain</label><br />
+                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="english" value="ENGLISH" onChange={handleChange} checked={values.musicLanguages.includes("ENGLISH")} />
+                  <label className='ml-2 text-lg' htmlFor="english">English</label><br />
+                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="turkish" value="TURKISH" onChange={handleChange} checked={values.musicLanguages.includes("TURKISH")} />
+                  <label className='ml-2 text-lg' htmlFor="turkish">Turkish</label><br />
+                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="german" value="GERMAN" onChange={handleChange} checked={values.musicLanguages.includes("GERMAN")} />
+                  <label className='ml-2 text-lg' htmlFor="german">German</label><br />
+                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="french" value="FRENCH" onChange={handleChange} checked={values.musicLanguages.includes("FRENCH")} />
+                  <label className='ml-2 text-lg' htmlFor="french">French</label><br />
+                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="italian" value="ITALIAN" onChange={handleChange} checked={values.musicLanguages.includes("ITALIAN")} />
+                  <label className='ml-2 text-lg' htmlFor="italian">Italian</label><br />
+                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="portuguese" value="PORTUGUESE" onChange={handleChange} checked={values.musicLanguages.includes("PORTUGUESE")} />
+                  <label className='ml-2 text-lg' htmlFor="portuguese">Portuguese</label><br />
+                  <input type="checkbox" className='w-[20px] h-[20px]' name="musicLanguages" id="spain" value="SPAIN" onChange={handleChange} checked={values.musicLanguages.includes("SPAIN")} />
+                  <label className='ml-2 text-lg' htmlFor="spain">Spain</label><br />
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ function PlaylistSearch() {
   const { loggedIn, Logout } = useAuth()
 
   const [readyData, setReadyData] = useState(true)
-  const [image, setImage] = useState("../../../Images/love/love3.jpeg")
+  const [image, setImage] = useState("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/love/love3.jpeg")
   const [label, setLabel] = useState("aşk")
   const [review, setReview] = useState("Aşk şarkılarını dinleme sevgin nedeniyle anladım. Kalbinin DJ'i olmalısın, çünkü romantik notaları çalma konusunda ustasın! Şu aşk şarkıları, senin duygusal playlist'inin başrol oyuncuları gibi duruyor, ne dersin?")
   const [progress, setProgress] = useState(0)
@@ -38,13 +38,13 @@ function PlaylistSearch() {
           let response = await fortuneTellingByPlaylist({ spotifyPlayList: values.search })
           if (response.data.emotion == "hareketli" || response.data.emotion == "enerjik") {
             //"../../Images/love/love3.jpeg"
-            setImage("../../../Images/energetic/energetic" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
+            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/energetic/energetic" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
           } else if (response.data.emotion == "arabesk") {
-            setImage("../../../Images/arabesque/arabesque" + (Math.floor(Math.random() * 6) + 1) + ".jpeg")
+            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/arabesque/arabesque" + (Math.floor(Math.random() * 6) + 1) + ".jpeg")
           } else if (response.data.emotion == "ask" || response.data.emotion == "aşk") {
-            setImage("../../../Images/love/love" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
+            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/love/love" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
           } else {
-            setImage("../../../Images/motivation/motivation" + (Math.floor(Math.random() * 4) + 1) + ".png")
+            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/motivation/motivation" + (Math.floor(Math.random() * 4) + 1) + ".png")
           }
           setLabel(response.data.emotion)
           setReview(response.data.fortune_telling)
