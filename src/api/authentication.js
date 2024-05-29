@@ -5,7 +5,11 @@ const signUp = async (input) => {
 }
 
 const loginIn = async (input) => {
-    const response = await axios.post(`${process.env.REACT_APP_BASE_ENDPOINT}/auth/login`, input);
+    let apiUrl = process.env.REACT_APP_BASE_ENDPOINT
+    if (apiUrl.startsWith('"') && apiUrl.endsWith('"')) {
+        apiUrl = apiUrl.substring(1, apiUrl.length - 1);
+      }
+    const response = await axios.post(`${apiUrl}/auth/login`, input);
     return response
 }
 
