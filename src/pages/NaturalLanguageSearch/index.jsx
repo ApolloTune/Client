@@ -51,7 +51,8 @@ function NaturalLanguageSearch() {
         }
       } catch (error) {
         if(error.message != "Request failed with status code 401"){
-          bag.setErrors({ general: error.message })
+          bag.setErrors({ general: error.response.data.message })
+          setReadyData(true);
         }
         else{
           Logout()
