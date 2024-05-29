@@ -6,6 +6,7 @@ import Login from '../../components/Login'
 import Register from '../../components/Register';
 import { useAuth } from '../../contexts/AuthContext';
 function Header() {
+  //test
   const [menuOpen, setMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [login, setLogin] = useState(false);
