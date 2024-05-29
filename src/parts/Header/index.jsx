@@ -43,7 +43,7 @@ function Header() {
       <Register register={register} closeDialog={closeDialog} />
       <div className="flex flex-col md:flex-row items-center justify-between">
         <Link to={'/'} className='flex items-center space-x-3'>
-          <img className='w-15 h-20 rounded-[32px]' src="../../Images/apollo.png" alt="Logo" />
+          <img className='w-15 h-20 rounded-[32px]' src="https://raw.githubusercontent.com/ApolloTune/Client/main/Images/apollo.png" alt="Logo" />
           <p className="font-mono text-2xl font-semibold tracking-wider not-italic">ApolloTune Beta</p>
         </Link>
         <div className="md:hidden">
