@@ -4,6 +4,7 @@ import { fortuneTellingByPlaylist } from '../../api/openai';
 import { LinearProgress, Stack } from '@mui/material';
 import { useAuth } from '../../contexts/AuthContext';
 import Warning from '../../components/Warning';
+import Information from '../../components/Information';
 function PlaylistSearch() {
   const { loggedIn, Logout } = useAuth()
 
@@ -11,6 +12,7 @@ function PlaylistSearch() {
   const [image, setImage] = useState("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/love/love3.jpeg")
   const [label, setLabel] = useState("aşk")
   const [review, setReview] = useState("Aşk şarkılarını dinleme sevgin nedeniyle anladım. Kalbinin DJ'i olmalısın, çünkü romantik notaları çalma konusunda ustasın! Şu aşk şarkıları, senin duygusal playlist'inin başrol oyuncuları gibi duruyor, ne dersin?")
+  const[information, setInformation] = useState(false);
   const [progress, setProgress] = useState(0)
   useEffect(() => {
     const timer = setInterval(() => {
@@ -33,25 +35,26 @@ function PlaylistSearch() {
     },
     onSubmit: async (values, bag) => {
       try {
-        if (loggedIn) {
-          setReadyData(false)
-          let response = await fortuneTellingByPlaylist({ spotifyPlayList: values.search })
-          if (response.data.emotion == "hareketli" || response.data.emotion == "enerjik") {
-            //"../../Images/love/love3.jpeg"
-            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/energetic/energetic" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
-          } else if (response.data.emotion == "arabesk") {
-            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/arabesque/arabesque" + (Math.floor(Math.random() * 6) + 1) + ".jpeg")
-          } else if (response.data.emotion == "ask" || response.data.emotion == "aşk") {
-            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/love/love" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
-          } else {
-            setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/motivation/motivation" + (Math.floor(Math.random() * 4) + 1) + ".png")
-          }
-          setLabel(response.data.emotion)
-          setReview(response.data.fortune_telling)
-          setReadyData(true)
-        } else {
-          bag.setErrors({ general: "Please login" })
-        }
+        setInformation(true)
+        // if (loggedIn) {
+        //   setReadyData(false)
+        //   let response = await fortuneTellingByPlaylist({ spotifyPlayList: values.search })
+        //   if (response.data.emotion == "hareketli" || response.data.emotion == "enerjik") {
+        //     //"../../Images/love/love3.jpeg"
+        //     setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/energetic/energetic" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
+        //   } else if (response.data.emotion == "arabesk") {
+        //     setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/arabesque/arabesque" + (Math.floor(Math.random() * 6) + 1) + ".jpeg")
+        //   } else if (response.data.emotion == "ask" || response.data.emotion == "aşk") {
+        //     setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/love/love" + (Math.floor(Math.random() * 4) + 1) + ".jpeg")
+        //   } else {
+        //     setImage("https://raw.githubusercontent.com/ApolloTune/Client/main/Images/motivation/motivation" + (Math.floor(Math.random() * 4) + 1) + ".png")
+        //   }
+        //   setLabel(response.data.emotion)
+        //   setReview(response.data.fortune_telling)
+        //   setReadyData(true)
+        // } else {
+        //   bag.setErrors({ general: "Please login" })
+        // }
       } catch (error) {
         if(error.message != "Request failed with status code 401"){
           bag.setErrors({ general: error.response.data.message })
@@ -63,10 +66,6 @@ function PlaylistSearch() {
       }
     }
   })
-
-
-
-
   return (
     <form onSubmit={handleSubmit}>
       <div className='container flex justify-content flex-col min-h-[516px] bg-black-125 mt-12 border-4 border-red-50 rounded-[18px]'>
@@ -93,6 +92,7 @@ function PlaylistSearch() {
             </Stack>
           </div>
         }
+         <Information title={"Coming Soon Stay Tuned!"} context={"This feature will be available for Turkish users very soon."} info={information} setInfo={setInformation}/>
         {errors.general && <Warning message={errors.general} />}
         <div className='mx-auto mt-6 flex flex-col items-center bg-blue-50 pt-2 pb-5 px-4 rounded-[28px] w-3/4 mb-3'>
           <img className='w-72 h-56 rounded-[30px]' src={image} alt="Ai photo" />
